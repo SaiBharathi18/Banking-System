@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ user.username }}</h1>
+        <nav>
+            <a href="{% url 'transaction' %}">Make a Transaction</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Account Balance:  {{ account.balance }}</h2>
+        <h3>Transaction History</h3>
+        <ul>
+            {% for transaction in transactions %}
+                <li>{{ transaction.date }} - {{ transaction.transaction_type }}:  {{ transaction.amount }}</li>
+            {% empty %}
+                <li>No transactions yet.</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
